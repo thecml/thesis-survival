@@ -26,7 +26,7 @@
 
 \vspace{0.4em}
 \begin{itemize}
-  \item The metric answers a different question than the model is designed to solve.
+  \item The metric answers a different question than the model is designed to solve -- a perfect ranking can come with wrong times and probabilities.
   \item Censoring assumptions are often left implicit, unjustified, or not corrected for.
   \item The result is not just noisy evaluation; it can change the meaning of the claim.
 \end{itemize}
@@ -55,6 +55,8 @@
 \end{frame}
 
 \begin{frame}{Bias appears when assumptions break}\centering
+\small Same model; only the censoring changes. Error vs.\ the oracle (true event times).
+\vspace{1.2em}
 
 \begin{minipage}{0.48\linewidth}
     \centering
@@ -72,15 +74,10 @@
     {\small IBS error under censoring.}
 \end{minipage}
 
-\vspace{0.4em}
-\small
-\begin{itemize}
-  \item We hold the predictive model fixed and vary only the censoring mechanism.
-  \item Errors are computed relative to oracle performance using true event times.
-  \item As censoring becomes more dependent, standard CI and IBS estimates drift away from the oracle.
-\end{itemize}
-
-\takeaway{The issue is not just which model is better; it is whether the evaluation procedure remains valid under the data-generating assumptions.}
+\vspace{1.2em}
+{\footnotesize \textbf{IPCW}: weights $1/\hat S_C(t)$ (Kaplan--Meier of the censoring times); assumes random censoring.\par}
+\vspace{1.2em}
+\takeaway{As censoring becomes dependent, both naive and IPCW-corrected metrics drift from the truth.}
 \end{frame}
 
 \begin{frame}{Practical recommendations and alternative views}\small
@@ -138,7 +135,7 @@
 \end{columns}
 \end{frame}
 
-\begin{frame}{Modelling dependent $E$ and $C$ with a copula}
+\begin{frame}{Modeling dependent $E$ and $C$ with a copula}
 \begin{columns}[c]
   \begin{column}{0.52\textwidth}
     \small

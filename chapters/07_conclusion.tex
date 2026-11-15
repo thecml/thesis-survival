@@ -3,29 +3,32 @@
 % ====================================================================
 
 \begin{frame}{Answers to the research questions}
-\small
-\begin{itemize}
-  \item \textbf{RQ1 -- Uncertainty}
-  \begin{itemize}
-    \item MC dropout and SNGP are cheaper alternatives to VI: same C-index on MIMIC-IV with half the parameters; SNGP D-calibrated on 4/4 datasets.
-    \item Conformal coverage holds on average, not per subgroup.
-  \end{itemize}
-  \item \textbf{RQ2 -- Multiple events}
-  \begin{itemize}
-    \item MENSA: one network, Weibull mixtures, trajectory loss -- competitive at lower cost.
-    \item ALS: five curves per patient, and what-if analyses.
-  \end{itemize}
-  \item \textbf{RQ3 -- Evaluation}
-  \begin{itemize}
-    \item Match the metric to the objective -- about 72\% of 92 papers do not.
-    \item IBS-Dep: 12--16\% less estimation error under dependent censoring, but not better at ranking models.
-  \end{itemize}
-  \item \textbf{RQ4 -- Beyond mortality}
-  \begin{itemize}
-    \item Falls (C-index 0.64 at 95\% censoring) and bearings (0.70 / 0.76).
-    \item The conclusions depend on how well the endpoint represents the real outcome.
-  \end{itemize}
-\end{itemize}
+\footnotesize
+\begin{columns}[T]
+  \begin{column}{0.48\textwidth}
+    \rqhead{RQ1 -- Uncertainty}
+    MC dropout and SNGP are cheaper alternatives to VI: MC dropout matches VI on MIMIC-IV (0.748 vs.\ 0.743) with half the parameters; SNGP is D-calibrated on 4/4 datasets (VI: 2/4).\par\vspace{0.25em}
+    \limit efficient uncertainty does not by itself make predictions trustworthy; conformal coverage holds on average, not per subgroup (74\% for early-stage TMJ).
+  \end{column}
+  \begin{column}{0.48\textwidth}
+    \rqhead{RQ2 -- Multiple events}
+    MENSA predicts competing or co-occurring events in one network: competitive with strong baselines, with fewer parameters than one model per event. In ALS, five curves give a fuller picture than one event time.\par\vspace{0.25em}
+    \limit the gains from joint training and the trajectory loss are small relative to run-to-run variability.
+  \end{column}
+\end{columns}
+\vspace{1.2em}
+\begin{columns}[T]
+  \begin{column}{0.48\textwidth}
+    \rqhead{RQ3 -- Evaluation}
+    Match the metric to the objective and state the censoring assumption -- about 72\% of 92 surveyed papers do not. IBS-Dep cuts IBS estimation error by 12--16\% vs.\ KM-based IPCW.\par\vspace{0.25em}
+    \limit lower estimation error did not help pick the best models, and IBS-Dep still assumes a copula for $E$ and $C$.
+  \end{column}
+  \begin{column}{0.48\textwidth}
+    \rqhead{RQ4 -- Beyond mortality}
+    Fall risk: 14 points better than chance at ranking (C-index 0.64). Bearings: C-index up to 0.70 (XJTU) and 0.76 (PRONOSTIA).\par\vspace{0.25em}
+    \limit fall timing could not be predicted (95\% censoring), alarm subscription is only a proxy for falls, and there were very few physical bearings in the datasets.
+  \end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Future work}
@@ -48,23 +51,28 @@
     \textbf{Especially my supervisors}, Christian Fischer Pedersen and Russell Greiner.
 
     \vspace{0.5em}
-    \textbf{Funding}: the PRECISE project (European AAL Association, Grant No.\ AAL-2021-8-90-CP), NSERC, CIFAR, Amii, the Siemens Foundation, and DigiRehab A/S -- with special thanks to Michael Harbo and Niels Heuer from DigiRehab A/S.
+    \textbf{Funding}: the PRECISE project, NSERC, CIFAR, Amii, the Danish Cancer Society, the Siemens Foundation, and DigiRehab A/S.
+
+    \vspace{0.5em}
+    \textbf{Special thanks} to Michael Harbo and Niels Heuer from DigiRehab A/S, and to Manuel Morante for reading my thesis and giving valuable feedback.
   \end{column}
   \begin{column}{0.3\textwidth}
     \centering
-    \includegraphics[height=0.66cm,width=0.9\linewidth,keepaspectratio]{logos/aarhus.png}
-\\[0.75em]
-    \includegraphics[height=0.66cm,width=0.9\linewidth,keepaspectratio]{logos/ualberta.png}
-\\[0.75em]
-    \includegraphics[height=0.66cm,width=0.9\linewidth,keepaspectratio]{logos/amii.png}
-\\[0.75em]
-    \includegraphics[height=0.66cm,width=0.9\linewidth,keepaspectratio]{logos/vector.jpg}
-\\[0.75em]
-    \includegraphics[height=0.66cm,width=0.9\linewidth,keepaspectratio]{logos/precise.png}
-\\[0.75em]
-    \includegraphics[height=0.66cm,width=0.9\linewidth,keepaspectratio]{logos/digirehab.png}
-\\[0.75em]
-    \includegraphics[height=0.66cm,width=0.9\linewidth,keepaspectratio]{logos/danish_cancer_society.png}
+    \includegraphics[height=0.6cm,width=0.9\linewidth,keepaspectratio]{logos/aarhus.png}
+\\[0.6em]
+    \includegraphics[height=0.6cm,width=0.9\linewidth,keepaspectratio]{logos/ualberta.png}
+\\[0.6em]
+    \includegraphics[height=0.6cm,width=0.9\linewidth,keepaspectratio]{logos/amii.png}
+\\[0.6em]
+    \includegraphics[width=1.55cm]{logos/nserc.png}
+\\[0.6em]
+    \includegraphics[height=0.5cm,width=0.9\linewidth,keepaspectratio]{logos/cifar.png}
+\\[0.6em]
+    \includegraphics[height=0.6cm,width=0.9\linewidth,keepaspectratio]{logos/danish_cancer_society.png}
+\\[0.6em]
+    \includegraphics[height=0.6cm,width=0.9\linewidth,keepaspectratio]{logos/digirehab.png}
+\\[0.6em]
+    \includegraphics[height=0.6cm,width=0.9\linewidth,keepaspectratio]{logos/precise.png}
   \end{column}
 \end{columns}
 \end{frame}

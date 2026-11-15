@@ -96,25 +96,7 @@
     \figsource{Figures from Lillelund et al.~\cite{lillelund_efficient_2025}}
   \end{column}
 \end{columns}
+\vspace{0.3em}
+{\footnotesize\textbf{Also in RQ1:} conformal prediction for TMJ involvement in children with JIA \cite{christensen_explainable_2024} -- the 90\% coverage holds on average, but early-stage cases are covered only 74\% of the time.\par}
 \end{frame}
 
-\begin{frame}{TMJ in JIA: coverage on average only}
-\begin{columns}[c]
-  \begin{column}{0.46\textwidth}
-    \small
-    1,035 children with JIA, 6,154 clinical examinations. A random forest flags examinations with likely TMJ involvement.
-    \vspace{0.5em}
-    \begin{itemize}
-      \item \textbf{Early stage} (first 2 years): precision 0.86, sensitivity 0.70 -- an earlier clinical study reported 0.47.
-      \vspace{0.3em}
-      \item \textbf{Conformal prediction} \cite{vovk2005} adds a set of likely classes that should contain the true class 90\% of the time.
-    \end{itemize}
-  \end{column}
-  \begin{column}{0.52\textwidth}
-    \centering
-    \includegraphics[width=0.88\linewidth]{plot_tmj_coverage.pdf}
-    \figsource{Data from Christensen et al.~\cite{christensen_explainable_2024}}
-  \end{column}
-\end{columns}
-\takeaway{The 90\% holds on average -- early-stage involvement is covered only 74\% of the time.}
-\end{frame}

@@ -83,24 +83,6 @@ A shared MLP learns a common representation $\tilde{\bm{x}}$; event-specific lay
 \takeaway{Top group on both C-indices.}
 \end{frame}
 
-\begin{frame}{Ablations: both components help}
-\begin{columns}[c]
-  \begin{column}{0.44\textwidth}
-    \small
-    \begin{itemize}
-      \item \textbf{Joint training}: within-patient ordering improves -- 90.2 vs.\ 87.8 on Rotterdam.
-      \item Independent training is slightly better on \emph{global} metrics.
-      \item \textbf{Trajectory loss}: small gains in local CI on Rotterdam and EBMT -- small relative to run-to-run variability.
-    \end{itemize}
-  \end{column}
-  \begin{column}{0.54\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{plot_mensa_ablation.pdf}
-    \figsource{Data from Lillelund et al.~\cite{lillelund_mensa_2026}}
-  \end{column}
-\end{columns}
-\end{frame}
-
 % ------------------------------------------------------------------ ALS
 \begin{frame}{ALS: when will each function be lost?}
 \small

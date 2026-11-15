@@ -289,15 +289,16 @@ def copula():
         ax.barh(y + (k - 1) * h, -err[col], h * 0.92, color=c, label=lab)
     for yi, v in zip(y, err.dep_cg_uw):
         ax.text(-v + 0.4, yi + h, f"{-v:.0f}%", va="center", ha="left", fontsize=6.5, color=MUTED)
-    # axis starts at 0; a negative reduction (= more error) is marked with a label instead
+    # a negative reduction (= more error than IPCW (KM)) is drawn left of zero and labelled
     for k, (col, _, _) in enumerate(series):
         for yi, v in zip(y, err[col]):
             if -v < 0:
-                ax.text(0.4, yi + (k - 1) * h, f"{-v:.0f}%", va="center", ha="left",
+                ax.text(0.4, yi + (k - 1) * h, f"−{v:.1f}%", va="center", ha="left",
                         fontsize=6.5, color=MUTED)
+    ax.axvline(0, color=INK, lw=0.8, zorder=3)
     ax.set_yticks(y, err.strategy)
     ax.invert_yaxis()
-    ax.set_xlim(0, 22)
+    ax.set_xlim(-3, 22)
     ax.set_xticks([0, 10, 20])
     ax.set_xlabel("Reduction in IBS estimation error\nvs. IPCW (KM)  [%]")
     ax.set_title("Error reduction (higher = better)", fontweight="bold")

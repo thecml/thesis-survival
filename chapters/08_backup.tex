@@ -1,0 +1,82 @@
+% ====================================================================
+%  Backup slides (after the references; not part of the 45-min talk)
+% ====================================================================
+
+\begin{frame}[noframenumbering,plain]
+\centering\vfill
+{\usebeamercolor[fg]{structure}\Large\bfseries Backup slides}
+\vfill
+\end{frame}
+
+% ---------------------------------------------------------- Background
+\begin{frame}{Good ranking $\neq$ good probabilities}
+\small
+Three models, four patients (stars = true event times):
+\begin{itemize}
+  \item $M_1$: perfect ranking, poor calibration
+  \item $M_2$: poor ranking, perfect calibration
+  \item $M_3$: both
+\end{itemize}
+\begin{center}
+\includegraphics[width=0.74\linewidth]{discrimiation_vs_calibration.png}
+\end{center}
+\vspace{-0.6em}
+\figsource{Figure courtesy of Qi et al.~\cite{qi2025enhancing}}
+\takeaway{A high C-index says nothing about whether the predicted times or probabilities are right.}
+\end{frame}
+
+\begin{frame}{Correcting for censoring: IPCW}
+\small
+A censored instance passes its weight on to those still at risk:
+\[
+  w_i = \frac{1}{\hat S_C(t_i)}, \qquad \hat S_C = \text{Kaplan--Meier of the censoring times}
+\]
+Uno's C-index \cite{uno2011c} and the Brier score / IBS \cite{graf1999assessment} reweight with $w_i$ -- assuming random censoring (RQ3).
+\vspace{0.2em}
+\begin{center}
+\includegraphics[width=0.84\linewidth]{ipcw.pdf}
+\end{center}
+\vspace{-0.6em}
+\figsource{Figure courtesy of Qi et al.~\cite{qi_current_2025}. Top: KM of $S_C(t)$. Bottom: weights passed on at each censoring.}
+\end{frame}
+
+% ---------------------------------------------------------------- RQ1
+\begin{frame}{TMJ in JIA: coverage on average only}
+\begin{columns}[c]
+  \begin{column}{0.46\textwidth}
+    \small
+    1,035 children with JIA, 6,154 clinical examinations. A random forest flags examinations with likely TMJ involvement.
+    \vspace{0.5em}
+    \begin{itemize}
+      \item \textbf{Early stage} (first 2 years): precision 0.86, sensitivity 0.70 -- an earlier clinical study reported 0.47.
+      \vspace{0.3em}
+      \item \textbf{Conformal prediction} \cite{vovk2005} adds a set of likely classes that should contain the true class 90\% of the time.
+    \end{itemize}
+  \end{column}
+  \begin{column}{0.52\textwidth}
+    \centering
+    \includegraphics[width=0.88\linewidth]{plot_tmj_coverage.pdf}
+    \figsource{Data from Christensen et al.~\cite{christensen_explainable_2024}}
+  \end{column}
+\end{columns}
+\takeaway{The 90\% holds on average -- early-stage involvement is covered only 74\% of the time.}
+\end{frame}
+
+% ---------------------------------------------------------------- RQ2
+\begin{frame}{Ablations: both components help}
+\begin{columns}[c]
+  \begin{column}{0.44\textwidth}
+    \small
+    \begin{itemize}
+      \item \textbf{Joint training}: within-patient ordering improves -- 90.2 vs.\ 87.8 on Rotterdam.
+      \item Independent training is slightly better on \emph{global} metrics.
+      \item \textbf{Trajectory loss}: small gains in local CI on Rotterdam and EBMT -- small relative to run-to-run variability.
+    \end{itemize}
+  \end{column}
+  \begin{column}{0.54\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{plot_mensa_ablation.pdf}
+    \figsource{Data from Lillelund et al.~\cite{lillelund_mensa_2026}}
+  \end{column}
+\end{columns}
+\end{frame}
