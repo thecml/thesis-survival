@@ -37,7 +37,9 @@ main.pdf
 # ====================================================================
 #  Plot and data scripts (figures/ keeps the generated PDFs)
 # ====================================================================
-scripts/
+# Scripts and thesis-table CSVs are tracked. The ALS CSVs are model
+# outputs on PRO-ACT data (data-use agreement), so they stay local.
+scripts/data/als_*.csv
 __pycache__/
 *.py[cod]
 

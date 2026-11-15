@@ -1,0 +1,6 @@
+# Source: thesis Table 3.4. Trainable parameters on MIMIC-IV, one hidden layer with 32 nodes.
+model,params
+Baseline (MLP),2849
+VI,5700
+MCD,2882
+SNGP,3776

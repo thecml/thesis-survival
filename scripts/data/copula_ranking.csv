@@ -1,0 +1,7 @@
+# Source: thesis Table 5.4. Runs (of 40) in which a metric recovers at least 2 of the oracle top-3 learners.
+metric,WHAS,METABRIC,Churn,GBSG,NACD,FLCHAIN,SUPPORT,Employee,MIMIC-IV,SEER-brain,SEER-liver,SEER-stomach
+IPCW (KM),38,40,37,40,39,39,37,33,33,37,39,36
+IPCW (CoxPH),39,40,37,40,40,39,36,35,29,38,39,38
+Dep (KM),40,39,34,38,38,18,35,12,1,38,38,40
+Dep (CG),40,39,29,37,36,18,34,11,1,36,30,35
+Dep (CG) UW,39,40,32,35,38,35,31,13,13,36,35,35

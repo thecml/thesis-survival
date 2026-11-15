@@ -1,0 +1,6 @@
+# Source: thesis Table 5.3, column "Average" (12 datasets, 5 learners, 10 runs). Relative change (%) in mean absolute IBS estimation error vs. IPCW (KM).
+strategy,ipcw_km,ipcw_coxph,dep_km,dep_cg,dep_cg_uw
+Original,0.0,-0.4,-1.4,-4.0,-11.8
+Top-5,0.0,-4.4,-2.8,-4.9,-12.2
+Top-10,0.0,-7.9,-1.4,-4.0,-11.7
+Random 25%,0.0,1.6,-2.6,-8.4,-16.4

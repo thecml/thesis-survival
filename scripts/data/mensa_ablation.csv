@@ -1,0 +1,10 @@
+# Source: thesis Table 4.5 (joint vs independent training) and Table 4.6 (with/without trajectory loss). Local C-index x100, mean and SD over 10 runs.
+study,dataset,variant,ci_l,ci_l_sd
+joint,Rotterdam,Joint,90.24,1.36
+joint,Rotterdam,Independent,87.81,1.74
+joint,PRO-ACT,Joint,76.07,0.51
+joint,PRO-ACT,Independent,75.92,0.88
+trajectory,Rotterdam,With,90.24,1.36
+trajectory,Rotterdam,Without,89.94,1.45
+trajectory,EBMT,With,68.73,0.56
+trajectory,EBMT,Without,68.39,0.56
