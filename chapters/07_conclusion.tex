@@ -1,0 +1,70 @@
+% ====================================================================
+%  Conclusion (~3 min)
+% ====================================================================
+
+\begin{frame}{Answers to the research questions}
+\small
+\begin{itemize}
+  \item \textbf{RQ1 -- Uncertainty}
+  \begin{itemize}
+    \item MC dropout and SNGP are cheaper alternatives to VI: same C-index on MIMIC-IV with half the parameters; SNGP D-calibrated on 4/4 datasets.
+    \item Conformal coverage holds on average, not per subgroup.
+  \end{itemize}
+  \item \textbf{RQ2 -- Multiple events}
+  \begin{itemize}
+    \item MENSA: one network, Weibull mixtures, trajectory loss -- competitive at lower cost.
+    \item ALS: five curves per patient, and what-if analyses.
+  \end{itemize}
+  \item \textbf{RQ3 -- Evaluation}
+  \begin{itemize}
+    \item Match the metric to the objective -- about 72\% of 92 papers do not.
+    \item IBS-Dep: 12--16\% less estimation error under dependent censoring, but not better at ranking models.
+  \end{itemize}
+  \item \textbf{RQ4 -- Beyond mortality}
+  \begin{itemize}
+    \item Falls (C-index 0.64 at 95\% censoring) and bearings (0.70 / 0.76).
+    \item The conclusions depend on how well the endpoint represents the real outcome.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Future work}
+\begin{itemize}
+  \item \textbf{Interpretability}: interpretable deep survival models vs.\ post-hoc explanations (SurvSHAP \cite{Krzyzinski2023SurvSHAPt}, SurvLIME \cite{Kovalev2020SurvLIME}) -- and how to evaluate them.
+  \vspace{0.6em}
+  \item \textbf{Evaluation}: evaluate event times and probabilities directly; dependence-aware C-index and D-calibration by swapping the KM correction for a copula-based one.
+  \vspace{0.6em}
+  \item \textbf{Foundation models}: pretrained (MOTOR \cite{steinberg2024motor}) and in-context survival models (SurvivalPFN \cite{qi2026survivalpfn}, SurvPFN \cite{bohm2026survpfn}) -- do they generalize across censoring mechanisms?
+\end{itemize}
+\end{frame}
+
+\begin{frame}[noframenumbering]{Thank you}
+\begin{columns}[c]
+  \begin{column}{0.66\textwidth}
+    \footnotesize
+    \textbf{Thanks to} Ali Hossein Gharari Foomani, Christian Fischer Pedersen, Dikte Straadt, Fernando Pannullo, Lena Todnem Bach Christensen, Martin Magris, Michael Harbo, Morten Opprud Jakobsen, Peter Bangsgaard Stoustrup, Ruben Pauwels, Russell Greiner, Sanjay Kalra, Shi-ang Qi, Stratos Vassis, Thomas Klit Pedersen, and Weijie Sun.
+
+    \vspace{0.5em}
+    \textbf{Especially my supervisors}, Christian Fischer Pedersen and Russell Greiner.
+
+    \vspace{0.5em}
+    \textbf{Funding}: the PRECISE project (European AAL Association, Grant No.\ AAL-2021-8-90-CP), NSERC, CIFAR, Amii, the Siemens Foundation, and DigiRehab A/S -- with special thanks to Michael Harbo and Niels Heuer from DigiRehab A/S.
+  \end{column}
+  \begin{column}{0.3\textwidth}
+    \centering
+    \includegraphics[height=0.66cm,width=0.9\linewidth,keepaspectratio]{logos/aarhus.png}
+\\[0.75em]
+    \includegraphics[height=0.66cm,width=0.9\linewidth,keepaspectratio]{logos/ualberta.png}
+\\[0.75em]
+    \includegraphics[height=0.66cm,width=0.9\linewidth,keepaspectratio]{logos/amii.png}
+\\[0.75em]
+    \includegraphics[height=0.66cm,width=0.9\linewidth,keepaspectratio]{logos/vector.jpg}
+\\[0.75em]
+    \includegraphics[height=0.66cm,width=0.9\linewidth,keepaspectratio]{logos/precise.png}
+\\[0.75em]
+    \includegraphics[height=0.66cm,width=0.9\linewidth,keepaspectratio]{logos/digirehab.png}
+\\[0.75em]
+    \includegraphics[height=0.66cm,width=0.9\linewidth,keepaspectratio]{logos/danish_cancer_society.png}
+  \end{column}
+\end{columns}
+\end{frame}

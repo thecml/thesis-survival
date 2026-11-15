@@ -1,0 +1,62 @@
+\pdfminorversion=7 % allow PDF 1.7 figures without warnings
+\documentclass[10pt,xcolor={dvipsnames}]{beamer} % 4:3 (projector in the defence room)
+\usetheme{Madrid}
+
+\input{preamble}
+
+\title[Survival Prediction for Precision Medicine]{Survival Prediction for Precision Medicine}
+\subtitle{PhD defence}
+
+\author[C.M. Lillelund]{Christian Marius Lillelund}
+
+\institute[]{
+Department of Electrical and Computer Engineering, Aarhus University \\[0.35cm]
+\footnotesize
+Supervisors: Christian Fischer Pedersen (Aarhus University) \\
+and Russell Greiner (University of Alberta)
+}
+
+\date[PhD defence, 3 Dec 2026]{December 3, 2026}
+
+\titlegraphic{\includegraphics[height=0.65cm]{AU.png}}
+
+\begin{document}
+
+\begin{frame}[noframenumbering,plain]
+\titlepage
+\end{frame}
+
+\section{Introduction}
+\input{chapters/01_introduction}
+
+\section{Background}
+\input{chapters/02_background}
+
+\section{RQ1: Uncertainty}
+\input{chapters/03_uncertainty}
+
+\section{RQ2: Multiple events}
+\input{chapters/04_multi_event}
+
+\section{RQ3: Evaluation}
+\input{chapters/05_evaluation}
+
+\section{RQ4: Beyond mortality}
+\input{chapters/06_applications}
+
+\section{Conclusion}
+\input{chapters/07_conclusion}
+
+% ---------------------------------------------------------------
+% References (not counted in the slide total)
+\appendix
+\begin{frame}[allowframebreaks,noframenumbering]
+\frametitle{References}
+\fontsize{5pt}{5pt}\selectfont
+\def\newblock{\hskip .11em plus .33em minus .07em}
+\bibliographystyle{ieeetr}
+\bibliography{references}
+\normalsize
+\end{frame}
+
+\end{document}

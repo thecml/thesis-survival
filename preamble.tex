@@ -1,0 +1,137 @@
+% ====================================================================
+%  Preamble -- PhD defence, "Survival Prediction for Precision Medicine"
+% ====================================================================
+
+% ------ PACKAGES ------
+\usepackage{multicol}
+\usepackage{csquotes}
+\usepackage{amsmath,amssymb,amsfonts,mathtools}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage{booktabs}
+\usepackage{caption}
+\captionsetup{justification=centering}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{soul}
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc,shapes.misc}
+\usepackage{appendixnumberbeamer}
+% Math to look like in an article
+\usefonttheme[onlymath]{serif}
+
+\graphicspath{{figures/}}
+
+% ------ REFERENCES ------
+% Plain \cite{} -> [1]; references listed in the final frame (ieeetr style)
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\setbeamercolor{bibliography item}{fg=black}
+\setbeamercolor{bibliography entry author}{fg=black}
+\setbeamercolor{bibliography entry title}{fg=black}
+\setbeamercolor{bibliography entry location}{fg=black}
+\setbeamercolor{bibliography entry note}{fg=black}
+
+% ------ BEAMER LOOK ------
+\setbeamertemplate{navigation symbols}{}
+% Footer text in regular (non-bold) weight
+\setbeamerfont{author in head/foot}{series=\mdseries}
+\setbeamerfont{title in head/foot}{series=\mdseries}
+\setbeamerfont{date in head/foot}{series=\mdseries}
+\setbeamerfont{page number in head/foot}{series=\mdseries}
+\setbeamerfont{caption}{size=\scriptsize}
+
+% ------ CUSTOM COMMANDS ------
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+
+\newcommand{\lam}{\lambda}
+\DeclarePairedDelimiter\autobracket{(}{)}
+\newcommand{\br}[1]{\autobracket*{#1}}
+\DeclarePairedDelimiter\sparen{[}{]}
+\newcommand{\sbr}[1]{\sparen*{#1}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\bx}{\bm{x}}
+\newcommand{\bth}{{\bm{\theta}}}
+\newcommand{\brth}{\br{\bm{\theta}}}
+\newcommand{\KL}{\text{KL}}
+\newcommand{\LB}{\mathcal{L}}
+\renewcommand{\Pr}{\text{Pr}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\iI}{\mathcal{I}^{-1}}
+\newcommand{\brt}{\br{\theta}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\S}{\Sigma}
+\newcommand{\iS}{\Sigma^{-1}}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\d}{\text{d}}
+\newcommand{\bmu}{{\bm{\mu}}}
+\newcommand{\bl}{{\bm{\lambda}}}
+\newcommand{\bz}{{\bm{\zeta}}}
+\newcommand{\natgrad}{\tilde{\nabla}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\brbth}{\br{\bm{\theta}}}
+\newcommand{\diag}[1]{\text{diag}\br{{#1}}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+% Small figure source line under a figure
+\newcommand{\figsource}[1]{\par\vspace{0.15em}{\centering\usebeamerfont{caption}\scriptsize #1\par}}
+
+% One-line take-away box at the bottom of a slide
+\newcommand{\takeaway}[1]{%
+  \par\vspace{0.1em}%
+  \begin{beamercolorbox}[rounded=true,shadow=false,sep=0.3em,center]{block body}%
+    \small #1%
+  \end{beamercolorbox}}
+
+% Venue badge in the top-right corner of the frame title bar
+\newcommand{\venue}[1]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north east, font=\tiny\bfseries, text=structure.fg,
+          fill=white, rounded corners=2pt, inner sep=2.5pt]
+      at ([xshift=-2.5mm,yshift=-2.2mm]current page.north east) {#1};
+  \end{tikzpicture}}
+
+% ------ ROADMAP (four research questions) ------
+% \roadmap[scale]{n}: n = 0 (all equal), 1..4 (highlight RQ n), 5 (all answered)
+\newcommand{\rqbox}[6]{% #1 id, #2 active?, #3 title, #4 chapter, #5 papers, #6 position
+  \ifnum#2=1
+    \node[rqactive] (rq#1) at #6 {\textbf{RQ#1 \,\textbullet\, #3}\hfill{\scriptsize #4}\\[0.25em]{\scriptsize #5}};
+  \else
+    \node[rqidle] (rq#1) at #6 {\textbf{RQ#1 \,\textbullet\, #3}\hfill{\scriptsize #4}\\[0.25em]{\scriptsize #5}};
+  \fi}
+\tikzset{
+  rqbase/.style={draw, rounded corners=4pt, text width=4.75cm, minimum height=2.0cm,
+                 align=left, inner sep=5pt, font=\small, line width=0.8pt},
+  rqactive/.style={rqbase, draw=structure.fg, fill=structure.fg, text=white},
+  rqidle/.style={rqbase, draw=structure.fg!35, fill=structure.fg!6, text=black!75},
+}
+\newcommand{\roadmap}[2][1]{%
+  \begin{center}
+  \begin{tikzpicture}[scale=#1, every node/.append style={transform shape}]
+    \def\on##1{\ifnum#2=0 0\else\ifnum#2=5 1\else\ifnum#2=##1 1\else 0\fi\fi\fi}
+    \rqbox{1}{\on{1}}{Uncertainty}{Ch.~3}{%
+      BaySurv \hfill BHI 2023, JBHI 2025\\
+      TMJ in JIA (conformal) \hfill EMBC 2024}{(0,0)}
+    \rqbox{2}{\on{2}}{Multiple events}{Ch.~4}{%
+      MENSA \hfill ML4H 2025\\
+      ALS decline \hfill PLOS ONE 2025}{(5.3,0)}
+    \rqbox{3}{\on{3}}{Evaluation}{Ch.~5}{%
+      Stop chasing the C-index \hfill ICML 2026\\
+      Copula-based Brier score \hfill UAI 2026}{(0,-2.35)}
+    \rqbox{4}{\on{4}}{Beyond mortality}{Ch.~6}{%
+      Fall risk \hfill J.~Pub.~Health 2026\\
+      Ball bearings \hfill AAAI FSS 2023}{(5.3,-2.35)}
+  \end{tikzpicture}
+  \end{center}}
+
+% A full roadmap frame, used at the start of each RQ section
+\newcommand{\roadmapframe}[2]{% #1 = RQ number, #2 = research question text
+  \begin{frame}[noframenumbering]{Roadmap}
+    \roadmap{#1}
+    \vspace{0.1em}
+    \begin{center}
+      \begin{minipage}{0.9\linewidth}\centering\small\itshape #2\end{minipage}
+    \end{center}
+  \end{frame}}

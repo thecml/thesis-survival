@@ -1,0 +1,120 @@
+% ====================================================================
+%  RQ1 -- Uncertainty (Chapter 3, ~6 min)
+%  Layout convention: text/maths left, figure right.
+% ====================================================================
+
+\roadmapframe{1}{RQ1. How can machine learning models, and deep survival models in particular, quantify uncertainty in individual predictions?}
+
+\begin{frame}{Why uncertainty? Refer unsure cases}
+\begin{columns}[c]
+  \begin{column}{0.53\textwidth}
+    \small
+    \textbf{Two kinds of uncertainty}
+    \begin{itemize}
+      \item \textbf{Aleatoric} -- noise in the data: $p(y \mid \bm{x}, \bm{\theta})$
+      \item \textbf{Epistemic} -- what the model does not know: $p(\bm{\theta} \mid \D)$
+    \end{itemize}
+    \vspace{0.3em}
+    \textbf{Bayesian posterior predictive}
+    \[
+      p(y \mid \bm{x}, \D) = \int p(y \mid \bm{x}, \bm{\theta})\, p(\bm{\theta} \mid \D)\, \d\bm{\theta}
+    \]
+    \vspace{-0.3em}
+    Intractable for neural nets $\rightarrow$ approximate.
+
+    \vspace{0.4em}
+    Use: if the uncertainty exceeds a threshold, refer the case to a clinician.
+  \end{column}
+  \begin{column}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{diagnosis_pipeline.pdf}
+    \figsource{Figure adapted from Filos et al.~\cite{filos2019systematic}}
+  \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{BaySurv: three probabilistic variants}
+\begin{columns}[c]
+  \begin{column}{0.56\textwidth}
+    \small
+    \textbf{Shared setup.} The risk score is a Gaussian $\N(\mu_{\bm{x}}, \sigma^2_{\bm{x}})$; each sample gives one survival curve.
+
+    \vspace{0.9em}
+    \textbf{VI.} A distribution per weight \cite{blundell2015weight} -- twice the parameters.
+
+    \vspace{0.9em}
+    \textbf{MC dropout.} Dropout stays on at prediction time \cite{gal_dropout_2016} -- same size as a normal network.
+
+    \vspace{0.9em}
+    \textbf{SNGP.} A Gaussian-process output layer \cite{liu2020simple} -- no sampling.
+  \end{column}
+  \begin{column}{0.42\textwidth}
+    \centering
+    \includegraphics[width=0.7\linewidth]{baysurv_vi.png}\\[-0.2em]
+    {\scriptsize\textbf{VI.}}\\[0.2em]
+    \includegraphics[width=0.7\linewidth]{baysurv_mcd.png}\\[-0.2em]
+    {\scriptsize\textbf{MC dropout.}}\\[0.3em]
+    \includegraphics[width=0.9\linewidth]{baysurv_sngp.png}\\[-0.1em]
+    {\scriptsize\textbf{SNGP.}}
+    \figsource{Figures from Lillelund et al.~\cite{lillelund_efficient_2025}}
+  \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{MC dropout matches VI at half the cost}
+\small Four datasets (METABRIC, SEER, SUPPORT, MIMIC-IV); D-calibrated if $p > 0.05$.
+
+\centering
+\includegraphics[width=0.82\linewidth]{plot_baysurv.pdf}
+\figsource{Data from Lillelund et al.~\cite{lillelund_efficient_2025}. MC dropout shown with $p = 0.5$.}
+\takeaway{MIMIC-IV: MC dropout 0.748 vs.\ VI 0.743 with half the parameters. SNGP: D-calibrated on 4/4.}
+\end{frame}
+
+\begin{frame}{Same median, different uncertainty}
+\begin{columns}[c]
+  \begin{column}{0.36\textwidth}
+    \small
+    One METABRIC patient, 1000 samples from the predictive distribution.
+    \vspace{0.4em}
+    \begin{itemize}
+      \item Curve: mean $\E[S(t \mid \bm{x}_i)]$ with 90\% credible interval
+      \item Histogram: predicted median times $\hat e_i$
+    \end{itemize}
+    \vspace{0.4em}
+    True time 135 months.\\
+    MC dropout: $\hat e_i = 122$\\
+    VI: $\hat e_i = 128$ -- but far less certain.
+  \end{column}
+  \begin{column}{0.62\textwidth}
+    \centering
+    {\scriptsize\textbf{MC dropout} ($p = 0.5$)}\\
+    \includegraphics[width=0.49\linewidth]{metabric_cri.pdf}\hfill
+    \includegraphics[width=0.49\linewidth]{metabric_cpd.pdf}\\[0.2em]
+    {\scriptsize\textbf{Variational inference}}\\
+    \includegraphics[width=0.49\linewidth]{metabric_cri_vi.pdf}\hfill
+    \includegraphics[width=0.49\linewidth]{metabric_cpd_vi.pdf}
+    \figsource{Figures from Lillelund et al.~\cite{lillelund_efficient_2025}}
+  \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{TMJ in JIA: coverage on average only}
+\begin{columns}[c]
+  \begin{column}{0.46\textwidth}
+    \small
+    1,035 children with JIA, 6,154 clinical examinations. A random forest flags examinations with likely TMJ involvement.
+    \vspace{0.5em}
+    \begin{itemize}
+      \item \textbf{Early stage} (first 2 years): precision 0.86, sensitivity 0.70 -- an earlier clinical study reported 0.47.
+      \vspace{0.3em}
+      \item \textbf{Conformal prediction} \cite{vovk2005} adds a set of likely classes that should contain the true class 90\% of the time.
+    \end{itemize}
+  \end{column}
+  \begin{column}{0.52\textwidth}
+    \centering
+    \includegraphics[width=0.88\linewidth]{plot_tmj_coverage.pdf}
+    \figsource{Data from Christensen et al.~\cite{christensen_explainable_2024}}
+  \end{column}
+\end{columns}
+\takeaway{The 90\% holds on average -- early-stage involvement is covered only 74\% of the time.}
+\end{frame}
